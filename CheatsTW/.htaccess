@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+ErrorDocument 404 /404.php
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
